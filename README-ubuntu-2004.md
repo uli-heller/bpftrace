@@ -1,14 +1,11 @@
-BPFTRACE und UBUNTU
-===================
+BPFTRACE und UBUNTU-20.04
+=========================
 
-Hier "meine" Beschreibung, wie ich BPFTRACE für Ubuntu baue.
-
-Ubuntu-20.04
-------------
+Hier "meine" Beschreibung, wie ich BPFTRACE für Ubuntu-20.04 baue.
 
 Ich starte mit einem aktuellen, leeren Container von Ubuntu-22.04.
 
-### Aktualisieren
+## Aktualisieren
 
 Kommandos:
 
@@ -17,7 +14,7 @@ sudo apt update
 sudo apt upgrade
 ```
 
-### Hilfsprogramme installieren
+## Hilfsprogramme installieren
 
 Kommandos:
 
@@ -45,7 +42,7 @@ sudo apt install -y \
 sudo apt install devscripts
 ```
 
-### Quellverzeichnisse einbinden
+## Quellverzeichnisse einbinden
 
 Kommandos:
 
@@ -56,7 +53,7 @@ sudo apt update
 sudo apt upgrade
 ```
 
-### Bauverzeichnis anlegen
+## Bauverzeichnis anlegen
 
 Kommandos:
 
@@ -64,9 +61,9 @@ Kommandos:
 mkdir ~/build
 ```
 
-### libbpf bauen
+## libbpf bauen
 
-#### Alte Version
+### Alte Version
 
 Kommandos:
 
@@ -79,7 +76,7 @@ cd libbpf-0.5.0/
 dpkg-buildpackage 
 ```
 
-#### Aktualisierte Version
+### Aktualisierte Version
 
 - Herunterladen: [libbpf-1.4.3.tar.gz](https://github.com/libbpf/libbpf/archive/refs/tags/v1.4.3.tar.gz)
 - Virencheck
@@ -96,16 +93,16 @@ dpkg-buildpackage
   - Sind zu alt!
   - Bspw. "bpf_link_type" fehlt!
 
-#### Einspielen
+### Einspielen
 
 ```
 cd ~/build/libbpf
 sudo apt install ./libbpf-dev_1.4.3-1dp01~1ubuntu20.04.1~focal_amd64.deb ./libbpf0_1.4.3-1dp01~1ubuntu20.04.1~focal_amd64.deb 
 ```
 
-### libbpfcc bauen
+## libbpfcc bauen
 
-#### Alte Version
+### Alte Version
 
 Kommandos:
 
@@ -119,7 +116,7 @@ sudo apt build-dep libbpfcc-dev
 # scheitert -> ignorieren!
 ```
 
-#### Aktualisierte Version
+### Aktualisierte Version
 
 - Herunterladen und umbenennen: [bcc-src-with-submodule-0.30.0.tar.gz](https://github.com/iovisor/bcc/releases/download/v0.30.0/bcc-src-with-submodule.tar.gz)
 - Virencheck
@@ -159,14 +156,14 @@ sudo apt build-dep libbpfcc-dev
 - Zusatzpaket installieren: `sudo apt install python3-setuptools`
 - Paket bauen: `dpkg-buildpackage`
 
-#### Einspielen
+### Einspielen
 
 ```
 cd ~/build/libbpfcc
 sudo apt install ./libbpfcc-dev_0.30.0-0dp01~focal_amd64.deb ./libbpfcc_0.30.0-0dp01~focal_amd64.deb
 ```
 
-### bpftrace
+## bpftrace
 
 ```
 mkdir -p ~/build/bpftrace
@@ -182,7 +179,7 @@ cd ../bpftrace-0.21.1
 dpkg-buildpackage
 ```
 
-### Test
+## Test
 
 ```
 uli@ulicsl:~$ sudo apt install ./bpftrace_0.21.1-1dp01~focal_amd64.deb
@@ -194,19 +191,11 @@ bpftrace: /usr/include/llvm-12/llvm/IR/Instructions.h:940: static llvm::GetEleme
 Abgebrochen
 ```
 
-### Experimente mit LLVM-12 und CLANG-12
+## Experimente mit LLVM-12 und CLANG-12
 
 - Alle DEB-Pakete nochmal bauen mit LLVM-12 und CLANG-12 -> keine Änderung
 - Zusätzlich: Optimierung abschalten -> keine Änderung
 
-Links
------
-
-- [libbpf](https://github.com/libbpf/libbpf)
-- [bcc - libbpfcc](https://github.com/iovisor/bcc/)
-- [bpftrace](https://github.com/bpftrace/bpftrace/)
-
-Historie
---------
+## Historie
 
 - 2024-07-04: Erste Version

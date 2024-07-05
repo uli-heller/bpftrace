@@ -1,14 +1,11 @@
-BPFTRACE und UBUNTU
-===================
+BPFTRACE und UBUNTU-22.04
+=========================
 
 Hier "meine" Beschreibung, wie ich BPFTRACE für Ubuntu baue.
 
-Ubuntu-22.04
-------------
-
 Ich starte mit einem aktuellen, leeren Container von Ubuntu-22.04.
 
-### Aktualisieren
+## Aktualisieren
 
 Kommandos:
 
@@ -39,7 +36,7 @@ Calculating upgrade... Done
 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
 ```
 
-### Hilfsprogramme installieren
+## Hilfsprogramme installieren
 
 Kommandos:
 
@@ -116,7 +113,7 @@ Replacing config file /etc/perl/XML/SAX/ParserDetails.ini with new version
 Processing triggers for libc-bin (2.35-0ubuntu3.8) ...
 ```
 
-### Quellverzeichnisse einbinden
+## Quellverzeichnisse einbinden
 
 Kommandos:
 
@@ -179,7 +176,7 @@ Calculating upgrade... Done
 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
 ```
 
-### Bauverzeichnis anlegen
+## Bauverzeichnis anlegen
 
 Kommandos:
 
@@ -187,9 +184,9 @@ Kommandos:
 mkdir ~/build
 ```
 
-### libbpf bauen
+## libbpf bauen
 
-#### Alte Version
+### Alte Version
 
 Kommandos:
 
@@ -255,7 +252,7 @@ dpkg-genchanges: info: not including original source code in upload
 dpkg-buildpackage: info: binary and diff upload (original source NOT included)
 ```
 
-#### Aktualisierte Version
+### Aktualisierte Version
 
 - Herunterladen: [libbpf-1.4.3.tar.gz](https://github.com/libbpf/libbpf/archive/refs/tags/v1.4.3.tar.gz)
 - Virencheck
@@ -268,16 +265,16 @@ dpkg-buildpackage: info: binary and diff upload (original source NOT included)
   - `sed -i -e 's/^/#/' debian/patches/series`
 - Paket bauen: `dpkg-buildpackage`
 
-#### Einspielen
+### Einspielen
 
 ```
 cd ~/build/libbpf
 sudo apt install ./libbpf-dev_1.4.3-1dp01~1ubuntu22.04.1~jammy_amd64.deb ./libbpf0_1.4.3-1dp01~1ubuntu22.04.1~jammy_amd64.deb
 ```
 
-### libbpfcc bauen
+## libbpfcc bauen
 
-#### Alte Version
+### Alte Version
 
 Kommandos:
 
@@ -305,7 +302,7 @@ make: *** [debian/rules:18: binary] Error 2
 dpkg-buildpackage: error: debian/rules binary subprocess returned exit status 2
 ```
 
-#### Aktualisierte Version
+### Aktualisierte Version
 
 - Herunterladen und umbenennen: [bcc-src-with-submodule-0.30.0.tar.gz](https://github.com/iovisor/bcc/releases/download/v0.30.0/bcc-src-with-submodule.tar.gz)
 - Virencheck
@@ -333,14 +330,14 @@ dpkg-buildpackage: error: debian/rules binary subprocess returned exit status 2
 - Zusatzpaket installieren: `sudo apt install python3-setuptools`
 - Paket bauen: `dpkg-buildpackage`
 
-#### Einspielen
+### Einspielen
 
 ```
 cd ~/build/libbpfcc
 sudo apt install ./libbpfcc-dev_0.30.0-0dp01~jammy_amd64.deb ./libbpfcc_0.30.0-0dp01~jammy_amd64.deb
 ```
 
-### bpftrace
+## bpftrace
 
 ```
 mkdir -p ~/build/bpftrace
@@ -356,13 +353,6 @@ cd ../bpftrace-0.21.1
 dpkg-buildpackage
 ```
 
-Links
------
-
-- [libbpf](https://github.com/libbpf/libbpf)
-- [libbpfcc](...)
-
-Historie
---------
+## Historie
 
 - 2024-07-04: Erste Version
