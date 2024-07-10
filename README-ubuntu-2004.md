@@ -196,6 +196,10 @@ Abgebrochen
 - Alle DEB-Pakete nochmal bauen mit LLVM-12 und CLANG-12 -> keine Änderung
 - Zusätzlich: Optimierung abschalten -> keine Änderung
 
+## Links
+
+- [LLVM für Debian/Ubuntu](https://apt.llvm.org/)
+
 ## Historie
 
 - 2024-07-04: Erste Version
